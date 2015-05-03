@@ -3,6 +3,7 @@ import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
@@ -12,7 +13,30 @@ import java.util.stream.Collectors;
 
 
 public class SocialGraph extends UndirectedGraph<String> {
+    /**
+     * Creates an empty social graph.
+     * 
+     * DO NOT MODIFY THIS CONSTRUCTOR.
+     */
+    public SocialGraph() {
+        super();
+    }
 
+    /**
+     * Creates a graph from a preconstructed hashmap.
+     * This method will be used to test your submissions. You will not find this
+     * in a regular ADT.
+     * 
+     * DO NOT MODIFY THIS CONSTRUCTOR.
+     * DO NOT CALL THIS CONSTRUCTOR ANYWHERE IN YOUR SUBMISSION.
+     * 
+     * @param hashmap adjacency lists representation of a graph that has no
+     * loops and is not a multigraph.
+     */
+    public SocialGraph(HashMap<String, ArrayList<String>> hashmap) {
+        super(hashmap);
+    }
+    
     public Set<String> friendsOfFriends(String person) {
     	if(person == null) throw new IllegalArgumentException("person");
     	if(!hashmap.containsKey(person)) throw new IllegalArgumentException("person");
