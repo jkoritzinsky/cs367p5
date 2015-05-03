@@ -1,20 +1,79 @@
 import java.io.StringWriter;
+import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
+import java.util.PriorityQueue;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 
 public class SocialGraph extends UndirectedGraph<String> {
 
-    public Set<String> friendsOfFriendsOf(String person) {
-        //TODO
-        return null;
+    public Set<String> friendsOfFriends(String person) {
+    	if(person == null) throw new IllegalArgumentException("person");
+    	if(!hashmap.containsKey(person)) throw new IllegalArgumentException("person");
+        ArrayList<String> friends = hashmap.get(person);
+        return friends.stream().flatMap(friend -> hashmap.get(friend).stream())
+        						.filter(fof -> !friends.contains(fof) && !fof.equals(person))
+        						.collect(Collectors.toCollection(HashSet<String>::new));
     }
 
-    public List<String> getPathBetween(String pForm, String pTo) {
-        //TODO
-        return null;
+    public List<String> getPathBetween(String pFrom, String pTo) {
+    	if(pFrom == null) throw new IllegalArgumentException("pFrom");
+    	if(pTo == null) throw new IllegalArgumentException("pTo");
+    	if(!hashmap.containsKey(pFrom)) throw new IllegalArgumentException("pFrom");
+    	if(!hashmap.containsKey(pTo)) throw new IllegalArgumentException("pTo");
+    	if(pFrom.equals(pTo)) throw new IllegalArgumentException();
+        // Find the shortest path using Djikstra's Algorithm
+    	class DijkstraRecord {
+    		public boolean visited = false;
+    		public int weight = Integer.MAX_VALUE;
+    		public String predecessor = null;
+    	}
+    	// Transform Node -> Node * <Visited * Weight * Predecessor> for node tracking
+    	Map<String, DijkstraRecord> dijkstraRecords = hashmap.keySet().stream().collect(Collectors.toMap(node -> node, node -> new DijkstraRecord()));
+    	dijkstraRecords.get(pFrom).weight = 0;
+    	// Use separate class for the priority queue because we need <Node * Weight>, and the DijkstraRecord class is built to not store the node name
+    	class PriorityQueueRecord {
+    		public PriorityQueueRecord(String node, int weight) {
+				this.node = node;
+				this.weight = weight;
+			}
+			public String node;
+    		public int weight;
+    	}
+    	PriorityQueue<PriorityQueueRecord> queue = new PriorityQueue<>(Comparator.comparingInt(record -> record.weight));
+    	queue.add(new PriorityQueueRecord(pFrom, 0));
+    	while(!queue.isEmpty()) {
+    		PriorityQueueRecord queueRecord = queue.remove();
+    		dijkstraRecords.get(queueRecord.node).visited = true;
+    		hashmap.get(queueRecord.node).stream().filter(friend -> !dijkstraRecords.get(friend).visited)
+    										 .forEach(friend -> {
+    											 DijkstraRecord friendRecord = dijkstraRecords.get(friend);
+    											 // All edge weights are 1
+    											 if(friendRecord.weight > queueRecord.weight + 1){
+    												 friendRecord.weight = queueRecord.weight + 1;
+    												 friendRecord.predecessor = queueRecord.node;
+    												 // Update record in priority queue by removing and re-adding updated version
+    												 queue.removeIf(item -> item.node.equals(friend));
+    												 queue.add(new PriorityQueueRecord(friend, queueRecord.weight + 1));
+    											 }
+    										 });
+    	}
+    	ArrayDeque<String> path = new ArrayDeque<>();
+    	DijkstraRecord record = dijkstraRecords.get(pTo);
+    	path.addFirst(pTo);
+    	while(record.predecessor != null) {
+    		path.addFirst(record.predecessor);
+    	}
+    	if(!path.peekFirst().equals(pFrom)) {
+    		return null;
+    	}
+        return new ArrayList<String>(path);
     }
 
     /**
