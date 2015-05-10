@@ -126,8 +126,10 @@ public class SocialNetworkingApp {
 			}
 			//Displays all of the degree one neighbors of the current user
 			case "friends": {
-				if(graph.getNeighbors(currUser) != null) { 
-					System.out.println(graph.getNeighbors(currUser));
+				if(graph.getNeighbors(currUser) != null) { //is currUser a V?
+					ArrayList<String> friends = new ArrayList<>(graph.getNeighbors(currUser));
+					Collections.sort(friends);
+					System.out.println(friends);
 				}
 				else {
 					System.out.println("You do not have any friends"); 
