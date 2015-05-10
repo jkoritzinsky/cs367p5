@@ -126,9 +126,10 @@ public class SocialNetworkingApp {
 			}
 			//Displays all of the degree one neighbors of the current user
 			case "friends": {
-				if(graph.getNeighbors(currUser) != null) { //is currUser a V?
+				if(graph.getNeighbors(currUser) != null) { 
+					//gets all of the friends of the current user
 					ArrayList<String> friends = new ArrayList<>(graph.getNeighbors(currUser));
-					Collections.sort(friends);
+					Collections.sort(friends); //sorts the friends into alphabetical order
 					System.out.println(friends);
 				}
 				else {
@@ -136,16 +137,18 @@ public class SocialNetworkingApp {
 				}
 				break;
 			}
-
+			//Prints all of the degree 2 friends of the current user
 			case "fof": { 
 				Set<String> friendsOfFriends = graph.friendsOfFriends(currUser);
-				ArrayList<String> fofArray = new ArrayList<String>();  
+				 //an array to store the friends of friends
+				ArrayList<String> fofArray = new ArrayList<String>(); 
+				//We need this in an array instead of a set so we can sort
 				fofArray.addAll(friendsOfFriends);
-				Collections.sort(fofArray);
+				Collections.sort(fofArray); //sorts the array in alphabetical order
 				System.out.println(fofArray);
 				break;
 			}
-
+			//Adds the specified person as a friend to the current user
 			case "friend": {
 				if(graph.addEdge(currUser, otherPerson)) {
 					System.out.println("You are now friends with " + otherPerson);
@@ -155,7 +158,7 @@ public class SocialNetworkingApp {
 				}
 				break;
 			}
-
+			//Removes the specified person from the current user's friends
 			case "unfriend": {
 				if(graph.getNeighbors(currUser).contains(otherPerson)) {
 					graph.removeEdge(currUser, otherPerson);		
