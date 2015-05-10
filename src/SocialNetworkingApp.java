@@ -160,7 +160,7 @@ public class SocialNetworkingApp {
 			}
 			//Removes the specified person from the current user's friends
 			case "unfriend": {
-				if(graph.getNeighbors(currUser).contains(otherPerson)) {
+				if(graph.getNeighbors(currUser).contains(otherPerson)) { //checks if they are friends
 					graph.removeEdge(currUser, otherPerson);		
 				}
 				else {
