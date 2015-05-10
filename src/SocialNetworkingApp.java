@@ -126,7 +126,9 @@ public class SocialNetworkingApp {
 
 			case "friends": {
 				if(graph.getNeighbors(currUser) != null) { //is currUser a V?
-					System.out.println(graph.getNeighbors(currUser));
+					ArrayList<String> friends = new ArrayList<>(graph.getNeighbors(currUser));
+					Collections.sort(friends);
+					System.out.println(friends);
 				}
 				else {
 					System.out.println("You do not have any friends"); 
