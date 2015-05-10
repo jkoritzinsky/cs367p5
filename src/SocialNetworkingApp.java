@@ -22,23 +22,21 @@ public class SocialNetworkingApp {
 	 * @throws FileNotFoundException if file does not exist
 	 */
 	public static SocialGraph loadConnections(String filename) throws FileNotFoundException {
-		try(Scanner fileScnr = new Scanner(new File(filename))) //A scanner for the file
-		{	
+		try(Scanner fileScnr = new Scanner(new File(filename))) {
 			String[] ln = null;
+			SocialGraph newGraph = new SocialGraph();
 			while(fileScnr.hasNextLine()) {
 				ln = fileScnr.nextLine().split(" ");
-				graph.addVertex(ln[0]);
+				newGraph.addVertex(ln[0]);
 				if(ln.length > 1) {
 					for(int i = 1; i < ln.length; i++) {
-						graph.addEdge(ln[0], ln[i]);
+						newGraph.addVertex(ln[i]);
+						newGraph.addEdge(ln[0], ln[i]);
 					}
 				}
 			}
+			return newGraph;
 		}
-		catch(FileNotFoundException ex) { //if  the file doesn't exist
-			System.out.println("Error: Cannot access file");
-		}
-		return new SocialGraph();
 	}
 
 	static Scanner stdin = new Scanner(System.in);
