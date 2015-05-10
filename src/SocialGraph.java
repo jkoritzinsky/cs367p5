@@ -93,6 +93,7 @@ public class SocialGraph extends UndirectedGraph<String> {
     	path.addFirst(pTo);
     	while(record.predecessor != null) {
     		path.addFirst(record.predecessor);
+    		record = dijkstraRecords.get(record.predecessor);
     	}
     	if(!path.peekFirst().equals(pFrom)) {
     		return null;
