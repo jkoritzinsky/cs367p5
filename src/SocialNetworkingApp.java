@@ -25,17 +25,17 @@ public class SocialNetworkingApp {
 		try(Scanner fileScnr = new Scanner(new File(filename))) //A scanner for the file
 		{	
 			String[] ln = null;
-			while(fileScnr.hasNext()) {
+			while(fileScnr.hasNextLine()) {
 				ln = fileScnr.nextLine().split(" ");
 				graph.addVertex(ln[0]);
 				if(ln.length > 1) {
-					for(int i = 0; i < ln.length; i++) {
-						
+					for(int i = 1; i < ln.length; i++) {
+						graph.addEdge(ln[0], ln[i]);
 					}
 				}
 			}
 		}
-		catch(FileNotFoundException ex) { //if the file doesn't exist
+		catch(FileNotFoundException ex) { //if  the file doesn't exist
 			System.out.println("Error: Cannot access file");
 		}
 		return new SocialGraph();
