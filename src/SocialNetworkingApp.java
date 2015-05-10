@@ -164,7 +164,7 @@ public class SocialNetworkingApp {
 			}
 			//Displays all of the degree one neighbors of the current user
 			case "friends": {
-				if(graph.getNeighbors(currUser) != null) { 
+				if(!graph.getNeighbors(currUser).isEmpty()) { 
 					//gets all of the friends of the current user
 					ArrayList<String> friends = new ArrayList<>(graph.getNeighbors(currUser));
 					Collections.sort(friends); //sorts the friends into alphabetical order
@@ -183,7 +183,12 @@ public class SocialNetworkingApp {
 				//We need this in an array instead of a set so we can sort
 				fofArray.addAll(friendsOfFriends);
 				Collections.sort(fofArray); //sorts the array in alphabetical order
-				System.out.println(fofArray);
+				if(!fofArray.isEmpty()) {
+					System.out.println(fofArray);
+				}
+				else {
+					System.out.println("You do not have any friends of friends");
+				}
 				break;
 			}
 			//Adds the specified person as a friend to the current user
@@ -199,7 +204,8 @@ public class SocialNetworkingApp {
 			//Removes the specified person from the current user's friends
 			case "unfriend": {
 				if(graph.getNeighbors(currUser).contains(otherPerson)) { //checks if they are friends
-					graph.removeEdge(currUser, otherPerson);		
+					graph.removeEdge(currUser, otherPerson);	
+					System.out.println("You are no longer friends with " + otherPerson);
 				}
 				else {
 				System.out.println("You are already not friends with " + otherPerson);
