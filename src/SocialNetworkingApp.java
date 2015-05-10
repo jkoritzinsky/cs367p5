@@ -1,3 +1,44 @@
+///////////////////////////////////////////////////////////////////////////////
+//                   ALL STUDENTS COMPLETE THESE SECTIONS
+// Title:            Social Networking App
+// Files:            (list of source files)
+// Semester:         CS367 Spring 2015
+//
+// Author:           Jeremy Koritzinsky
+// Email:            jeremy.koritzinsky@wisc.edu
+// CS Login:         kortizinsky
+// Lecturer's Name:  Skrentny
+// Lab Section:      002
+//
+//////////////////// PAIR PROGRAMMERS COMPLETE THIS SECTION ////////////////////
+//
+//                   CHECK ASSIGNMENT PAGE TO see IF PAIR-PROGRAMMING IS ALLOWED
+//                   If pair programming is allowed:
+//                   1. Read PAIR-PROGRAMMING policy (in cs302 policy) 
+//                   2. choose a partner wisely
+//                   3. REGISTER THE TEAM BEFORE YOU WORK TOGETHER 
+//                      a. one partner creates the team
+//                      b. the other partner must join the team
+//                   4. complete this section for each program file.
+//
+// Pair Partner:     Jeffrey Tucker
+// Email:            jetucker@wisc.edu	
+// CS Login:         jtucker
+// Lecturer's Name:  Skrentny
+// Lab Section:      002
+//
+//////////////////// STUDENTS WHO GET HELP FROM OTHER THAN THEIR PARTNER //////
+//                   must fully acknowledge and credit those sources of help.
+//                   Instructors and TAs do not have to be credited here,
+//                   but tutors, roommates, relatives, strangers, etc do.
+//
+// Persons:          Identify persons by name, relationship to you, and email.
+//                   Describe in detail the the ideas and help they provided.
+//
+// Online sources:   avoid web searches to solve your problems, but if you do
+//                   search, be sure to include Web URLs and description of 
+//                   of any information you find.
+//////////////////////////// 80 columns wide //////////////////////////////////
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.sql.Array;

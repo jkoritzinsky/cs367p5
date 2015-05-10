@@ -1,3 +1,33 @@
+///////////////////////////////////////////////////////////////////////////////
+//                   ALL STUDENTS COMPLETE THESE SECTIONS
+// Main Class File:  SocialNetworkingApp
+// File:             scr
+// Semester:         CS367 Spring 2015
+//
+// Author:           Jeremy Koritzinsky
+// CS Login:         koritzinsky
+// Lecturer's Name:  Skrentny
+// Lab Section:      002
+//
+//////////////////// PAIR PROGRAMMERS COMPLETE THIS SECTION ////////////////////
+//
+// Pair Partner:     Jeffrey Tucker
+// Email:            jetucker@wisc.edu	
+// CS Login:         jtucker
+// Lecturer's Name:  Skrentny
+// Lab Section:      002
+//
+//////////////////// STUDENTS WHO GET HELP FROM OTHER THAN THEIR PARTNER //////
+//                   fully acknowledge and credit all sources of help,
+//                   other than Instructors and TAs.
+//
+// Persons:          Identify persons by name, relationship to you, and email.
+//                   Describe in detail the the ideas and help they provided.
+//
+// Online sources:   avoid web searches to solve your problems, but if you do
+//                   search, be sure to include Web URLs and description of 
+//                   of any information you find.
+//////////////////////////// 80 columns wide //////////////////////////////////
 import java.io.StringWriter;
 import java.util.ArrayDeque;
 import java.util.ArrayList;
@@ -10,7 +40,6 @@ import java.util.Map;
 import java.util.PriorityQueue;
 import java.util.Set;
 import java.util.stream.Collectors;
-
 
 public class SocialGraph extends UndirectedGraph<String> {
     /**
@@ -36,7 +65,13 @@ public class SocialGraph extends UndirectedGraph<String> {
     public SocialGraph(HashMap<String, ArrayList<String>> hashmap) {
         super(hashmap);
     }
-    
+    /**
+     * Returns a set of Strings of each of the person's friends' friends.
+     *
+     * <p>Bugs: None known
+     *
+     * @author Jeremy Kortizinsky
+     */
     public Set<String> friendsOfFriends(String person) {
     	if(person == null) throw new IllegalArgumentException("person");
     	if(!hashmap.containsKey(person)) throw new IllegalArgumentException("person");
@@ -45,7 +80,13 @@ public class SocialGraph extends UndirectedGraph<String> {
         						.filter(fof -> !friends.contains(fof) && !fof.equals(person))
         						.collect(Collectors.toCollection(HashSet<String>::new));
     }
-
+    /**
+     * Returns a the shortest path between two people
+     *
+     * <p>Bugs: None known
+     *
+     * @author Jeremy Kortizinsky
+     */
     public List<String> getPathBetween(String pFrom, String pTo) {
     	if(pFrom == null) throw new IllegalArgumentException("pFrom");
     	if(pTo == null) throw new IllegalArgumentException("pTo");
