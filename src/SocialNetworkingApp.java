@@ -25,11 +25,12 @@ public class SocialNetworkingApp {
 		try(Scanner fileScnr = new Scanner(new File(filename))) //A scanner for the file
 		{	
 			String[] ln = null;
-			while(fileScnr.hasNextLine()) {
-				ln = fileScnr.nextLine().split(" ");
+			while(fileScnr.hasNextLine()) { //for each line in the file
+				ln = fileScnr.nextLine().split(" "); //seperates the name
 				graph.addVertex(ln[0]);
 				if(ln.length > 1) {
 					for(int i = 1; i < ln.length; i++) {
+						graph.addVertex(ln[i]);
 						graph.addEdge(ln[0], ln[i]);
 					}
 				}
@@ -112,7 +113,7 @@ public class SocialNetworkingApp {
 			}
 
 			switch(cmd) {
-
+			//Displays the shortest path between the current user and the specified person
 			case "connection": {     
 				List<String> L1 = graph.getPathBetween(currUser, otherPerson);
 				if(L1 != null) {
@@ -123,9 +124,9 @@ public class SocialNetworkingApp {
 				}
 				break;
 			}
-
+			//Displays all of the degree one neighbors of the current user
 			case "friends": {
-				if(graph.getNeighbors(currUser) != null) { //is currUser a V?
+				if(graph.getNeighbors(currUser) != null) { 
 					System.out.println(graph.getNeighbors(currUser));
 				}
 				else {
@@ -134,7 +135,7 @@ public class SocialNetworkingApp {
 				break;
 			}
 
-			case "fof": { //null checks?
+			case "fof": { 
 				Set<String> friendsOfFriends = graph.friendsOfFriends(currUser);
 				ArrayList<String> fofArray = new ArrayList<String>();  
 				fofArray.addAll(friendsOfFriends);
